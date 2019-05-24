@@ -436,7 +436,9 @@ let init_use_file =
          match (toplevel_phrase : toplevel_phrase) with
          | Ptop_def items ->
              List.map items ~f:(fun {Parsetree.pstr_loc} -> pstr_loc)
-         | Ptop_dir _ -> []))
+         | Ptop_dir {pdir_loc; pdir_arg= None; _} -> [pdir_loc]
+         | Ptop_dir {pdir_loc; pdir_arg= Some arg; _} ->
+             [pdir_loc; arg.pdira_loc]))
 
 let remove = ref true
 

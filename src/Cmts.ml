@@ -435,10 +435,8 @@ let init_use_file =
     (List.concat_map ~f:(fun toplevel_phrase ->
          match (toplevel_phrase : toplevel_phrase) with
          | Ptop_def items ->
-             List.map items ~f:(fun {Parsetree.pstr_loc} -> pstr_loc)
-         | Ptop_dir {pdir_loc; pdir_arg= None; _} -> [pdir_loc]
-         | Ptop_dir {pdir_loc; pdir_arg= Some arg; _} ->
-             [pdir_loc; arg.pdira_loc]))
+             List.map items ~f:(fun {Parsetree.pstr_loc; _} -> pstr_loc)
+         | Ptop_dir {pdir_loc; _} -> [pdir_loc]))
 
 let remove = ref true
 
